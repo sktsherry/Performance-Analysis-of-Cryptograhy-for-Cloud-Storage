@@ -4,12 +4,12 @@
 
 ### PyCrypto without concurrency
 
-* `cd aes-without-ray/`
+* `cd AES-without-ray/`
 *  run benchmarking with `python3 script.py (param: mb size as integer)`
 
 ### Pycrypto with concurrency
 
-* `cd aes-with-ray/Scripts/`
+* `cd AES-with-ray/Scripts/`
 *  run benchmarking with `python3 script.py`
 * change file sizes inside script
 
