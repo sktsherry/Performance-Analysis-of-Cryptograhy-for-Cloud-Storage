@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/asmCrypto/0.22.0/asmcrypto.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/asmCrypto/2.3.2/asmcrypto.all.js"/>-->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/sjcl/1.0.8/sjcl.js"></script>-->
+	<script src="sjcl.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/forge/0.10.0/forge.min.js"></script>
+	
+	<script src="./wasm-go/wasm_exec.js"></script>
+	<script>
+		var go = new Go();
+		WebAssembly.instantiateStreaming(fetch("wasm-go/aes.wasm"), go.importObject).then(async (result) => {
+			go.run(result.instance);
+			await WebAssembly.instantiate(result.module, go.importObject)
+		});
+	</script>
+
+	<script src="./wasm-c/aes.js"></script>
+</head>
+
+
+<body>
+
+<h1>Browser-based AES benchmarking experiment</h1>
+
+<button onclick="test_asm()">
+	Run ASMCRYPTO
+</button>
+
+<button onclick="test_cryptojs()">
+	Run CRYPTOJS
+</button>
+
+<button onclick="test_forgejs()">
+	Run FORGEJS
+</button>
+
+<button onclick="test_sjcl()">
+	Run SJCL
+</button>
+
+<button onclick="test_wasm_go()">
+	Run WASM (Go)
+</button>
+
+<button onclick="test_wasm_c()">
+	Run WASM (C)
+</button>
+
+</body>
+
+<script type="text/javascript" src="utils.js">	
+</script>
+
+<script type="text/javascript" src="asmcrypto.js">	
+</script>
+
+<script type="text/javascript" src="cryptojs.js">	
+</script>
+
+<script type="text/javascript" src="forge.js">	
+</script>
+
+<script type="text/javascript" src="sjcl_test.js">	
+</script>
+
+<script type="text/javascript" src="wasm-go/wasm-go.js">	
+</script>
+
+<script type="text/javascript" src="wasm-c/wasm-c.js">	
+</script>
+</html>
